@@ -1,16 +1,19 @@
 /* AI MCP Tools interaction and profile update */
 .global-language-switch {
+  position: fixed !important;
   top: auto !important;
-  right: 18px !important;
+  left: 18px !important;
+  right: auto !important;
   bottom: 18px !important;
   z-index: 120 !important;
   padding: 10px 13px !important;
+  max-width: calc(100vw - 36px);
 }
 
 .aimcp-account-shortcut {
   position: fixed;
   right: 18px;
-  bottom: 70px;
+  bottom: 18px;
   z-index: 119;
   display: inline-flex;
   align-items: center;
@@ -27,9 +30,24 @@
 }
 .aimcp-account-shortcut:hover { border-color: var(--purple, #8c72ed); color: var(--purple, #8c72ed); }
 
+.tour-replay {
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--muted);
+  background: var(--surface);
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .2s;
+}
+.tour-replay:hover { color: var(--purple); border-color: var(--purple); }
+
 .core-inner span, .core-inner small { display: none !important; }
 .catalog-visual-core span { display: none !important; }
 .telegram-float { display: none !important; }
+.catalog-nav-right .language-switch { display: none !important; }
 
 .aimcp-auth-page, .aimcp-profile-page {
   min-height: 78vh;
@@ -104,8 +122,10 @@
 .aimcp-security-pending { color: var(--muted); }
 
 @media (max-width: 650px) {
-  .global-language-switch { right: 12px !important; bottom: 12px !important; }
-  .aimcp-account-shortcut { right: 12px; bottom: 62px; }
+  .global-language-switch { left: 12px !important; right: auto !important; bottom: 12px !important; }
+  .aimcp-account-shortcut { right: 12px; bottom: 12px; }
+  .tour-replay { min-height: 34px; padding: 0 8px; font-size: 9px; }
+  .nav-actions { gap: 6px; }
   .aimcp-profile-grid { grid-template-columns: 1fr; }
   .aimcp-profile-wide { grid-column: auto; }
   .aimcp-auth-card { padding: 28px 20px; }

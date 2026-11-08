@@ -72,6 +72,11 @@ export default function Home() {
     setWelcomeOpen(false);
   }
 
+  function openWelcome() {
+    setTourStep(0);
+    setWelcomeOpen(true);
+  }
+
   function showLoginInfo(provider: string) {
     signIn(provider.toLowerCase(), { callbackUrl: "/" });
   }
@@ -91,10 +96,13 @@ export default function Home() {
         </div>
 
         <div className="nav-actions">
+          <button className="tour-replay" onClick={openWelcome}>
+            How it works
+          </button>
           <a className="nav-cta" href="/catalog">
             Catalog <ArrowUpRight size={15}/>
           </a>
-          <button className="login-small" onClick={() => setWelcomeOpen(true)}>
+          <button className="login-small" onClick={openWelcome}>
             Sign in
           </button>
         </div>
@@ -185,8 +193,6 @@ export default function Home() {
           <div className="art-core">
             <div className="core-inner">
               <Command size={48} strokeWidth={1.5}/>
-              <span>AI MCP</span>
-              <small>TOOLS</small>
             </div>
           </div>
 
