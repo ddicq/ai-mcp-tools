@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { signIn } from "next-auth/react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowRight, ArrowUpRight, Bot, Check, ChevronLeft, ChevronRight,
@@ -69,10 +70,7 @@ export default function Home() {
   }
 
   function showLoginInfo(provider: string) {
-    setAuthMessage(
-      `Вход через ${provider} пока не подключён. Для запуска потребуется настроить авторизацию ${provider} и серверную часть платформы.`
-    );
-    setShowAuthMessage(true);
+  signIn(provider.toLowerCase(), { callbackUrl: "/" });
   }
 
   return (
