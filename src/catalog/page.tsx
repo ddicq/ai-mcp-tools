@@ -1,177 +1,289 @@
-
 "use client";
 
+import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import {
-  ArrowLeft, ArrowRight, ArrowUpRight, Bot, Check,
-  Command, MessageCircle, Search, ShieldCheck, Users
+  Search,
+  MessageCircle,
+  ArrowUpRight,
+  Sparkles,
+  ShieldCheck,
+  Zap,
+  X,
+  SlidersHorizontal,
 } from "lucide-react";
-import { useMemo, useState } from "react";
 
-const catalogItems = [
+const integrations = [
   {
+    id: "telegram",
     name: "Telegram",
     category: "Социальные сети",
-    description: "Инструменты для работы с ботами, сообщениями, чатами, группами и каналами Telegram.",
-    details: ["Управление ботами", "Сообщения и чаты", "Группы и каналы", "Медиа и файлы"],
+    description:
+      "Подключите Telegram к ИИ и управляйте ботами, сообщениями, чатами, группами и каналами через MCP.",
     icon: MessageCircle,
-    color: "telegram",
+    color: "#229ED9",
+    features: [
+      "Управление Telegram-ботами",
+      "Отправка и обработка сообщений",
+      "Работа с чатами и группами",
+      "Управление каналами",
+      "Передача медиа и файлов",
+    ],
+    status: "Доступен для подключения",
   },
 ];
+
+const categories = ["Все категории", "Социальные сети"];
 
 export default function CatalogPage() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("Все категории");
 
-  const categories = ["Все категории", "Социальные сети"];
-
-  const filtered = useMemo(() => {
-    return catalogItems.filter((item) => {
+  const filteredIntegrations = useMemo(() => {
+    return integrations.filter((item) => {
       const matchesSearch =
         item.name.toLowerCase().includes(search.toLowerCase()) ||
         item.description.toLowerCase().includes(search.toLowerCase());
+
       const matchesCategory =
         category === "Все категории" || item.category === category;
+
       return matchesSearch && matchesCategory;
     });
   }, [search, category]);
 
   return (
     <main className="catalog-page">
-      <nav className="nav wrap">
-        <a className="brand" href="/">
-          <span className="brand-mark"><Command size={19}/></span>
-          AI MCP <b>TOOLS</b>
-        </a>
-        <div className="nav-links">
-          <a href="/">Home</a>
-          <a href="/#about">About</a>
-          <a href="/#security">Security</a>
-        </div>
-        <a className="nav-cta" href="/">
-          <ArrowLeft size={15}/> Back home
-        </a>
-      </nav>
+      <section className="catalog-hero">
+        <div className="catalog-hero-glow catalog-glow-one" />
+        <div className="catalog-hero-glow catalog-glow-two" />
 
-      <section className="catalog-hero wrap">
         <motion.div
-          className="eyebrow"
-          initial={{ opacity: 0, y: 12 }}
+          className="catalog-hero-content"
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65 }}
         >
-          <span className="pulse"/> INTEGRATION DIRECTORY
-        </motion.div>
-        <motion.h1
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: .08 }}
-        >
-          Explore the<br/><em>catalog.</em>
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: .16 }}
-        >
-          Find integrations for your AI assistant. Choose a category, explore available tools and discover new ways to connect your services.
-        </motion.p>
+          <div className="catalog-eyebrow">
+            <Sparkles size={15} />
+            <span>AI MCP TOOLS</span>
+          </div>
 
-        <div className="catalog-search">
-          <Search size={19}/>
-          <input
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search integrations..."
-            aria-label="Search integrations"
-          />
-          <span>{filtered.length} {filtered.length === 1 ? "result" : "results"}</span>
-        </div>
+          <h1>
+            Explore the
+            <br />
+            <span className="gradient-text">MCP catalog.</span>
+          </h1>
+
+          <p>
+            Discover integrations that connect your favorite services
+            to AI assistants. Find the tools you need and expand what
+            your AI can do.
+          </p>
+
+          <div className="catalog-hero-stats">
+            <div>
+              <strong>{integrations.length}</strong>
+              <span>Integration</span>
+            </div>
+            <div className="catalog-stat-divider" />
+            <div>
+              <strong>{categories.length - 1}</strong>
+              <span>Category</span>
+            </div>
+            <div className="catalog-stat-divider" />
+            <div>
+              <strong>MCP</strong>
+              <span>Protocol</span>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="catalog-hero-art"
+          initial={{ opacity: 0, scale: 0.8, rotate: -8 }}
+          animate={{ opacity: 1, scale: 1, rotate: 0 }}
+          transition={{ duration: 0.8, delay: 0.15 }}
+        >
+          <div className="catalog-orbit orbit-one" />
+          <div className="catalog-orbit orbit-two" />
+          <div className="catalog-orbit orbit-three" />
+
+          <div className="catalog-art-center">
+            <Sparkles size={42} />
+          </div>
+
+          <div className="catalog-art-node node-one">
+            <MessageCircle size={22} />
+          </div>
+          <div className="catalog-art-node node-two">
+            <Zap size={21} />
+          </div>
+          <div className="catalog-art-node node-three">
+            <ShieldCheck size={21} />
+          </div>
+        </motion.div>
       </section>
 
-      <section className="catalog-content wrap">
-        <aside className="category-sidebar">
-          <div className="category-heading">CATEGORIES</div>
-          {categories.map((item) => (
-            <button
-              key={item}
-              className={`category-button ${category === item ? "selected" : ""}`}
-              onClick={() => setCategory(item)}
+      <section className="catalog-content">
+        <div className="catalog-section-heading">
+          <div>
+            <span className="catalog-overline">DISCOVER TOOLS</span>
+            <h2>Integration catalog</h2>
+            <p>Find the right connection for your AI assistant.</p>
+          </div>
+        </div>
+
+        <div className="catalog-toolbar">
+          <div className="catalog-search">
+            <Search size={19} />
+            <input
+              type="text"
+              placeholder="Search integrations..."
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+            />
+            {search && (
+              <button
+                type="button"
+                className="catalog-clear"
+                onClick={() => setSearch("")}
+                aria-label="Clear search"
+              >
+                <X size={16} />
+              </button>
+            )}
+          </div>
+
+          <div className="catalog-filter">
+            <SlidersHorizontal size={17} />
+            <select
+              value={category}
+              onChange={(event) => setCategory(event.target.value)}
+              aria-label="Filter by category"
             >
-              <span>{item}</span>
-              <ArrowRight size={14}/>
-            </button>
-          ))}
-          <div className="category-tip">
-            <ShieldCheck size={18}/>
-            <p>Each integration has its own tools, access requirements and connection instructions.</p>
+              {categories.map((item) => (
+                <option key={item} value={item}>
+                  {item}
+                </option>
+              ))}
+            </select>
           </div>
-        </aside>
+        </div>
 
-        <div className="catalog-results">
-          <div className="catalog-results-head">
-            <div>
-              <span className="section-label">01 / SOCIAL NETWORKS</span>
-              <h2>Социальные сети</h2>
-            </div>
-            <span className="result-count">{filtered.length} INTEGRATION</span>
-          </div>
+        <div className="catalog-results-label">
+          <span>
+            {filteredIntegrations.length}{" "}
+            {filteredIntegrations.length === 1 ? "integration" : "integrations"}
+          </span>
+          <span className="catalog-results-line" />
+          <span>Available tools</span>
+        </div>
 
-          {filtered.length > 0 ? (
-            <div className="catalog-grid">
-              {filtered.map((item, i) => (
+        {filteredIntegrations.length > 0 ? (
+          <div className="catalog-grid">
+            {filteredIntegrations.map((item, index) => {
+              const Icon = item.icon;
+
+              return (
                 <motion.article
-                  className="catalog-card"
-                  key={item.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * .08 }}
+                  id={item.id}
+                  key={item.id}
+                  className="integration-card"
+                  initial={{ opacity: 0, y: 28 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileHover={{ y: -7 }}
                 >
-                  <div className="catalog-card-top">
-                    <div className={`catalog-app-icon ${item.color}`}>
-                      <item.icon size={27}/>
+                  <div className="integration-card-top">
+                    <div
+                      className="integration-icon"
+                      style={{
+                        background: `${item.color}18`,
+                        color: item.color,
+                      }}
+                    >
+                      <Icon size={29} />
                     </div>
-                    <span className="catalog-category">{item.category}</span>
+
+                    <span className="integration-status">
+                      <span className="integration-status-dot" />
+                      {item.status}
+                    </span>
                   </div>
 
-                  <h3>{item.name}</h3>
-                  <p>{item.description}</p>
+                  <div className="integration-card-info">
+                    <div className="integration-category">
+                      {item.category}
+                    </div>
+                    <h3>{item.name}</h3>
+                    <p>{item.description}</p>
+                  </div>
 
-                  <div className="catalog-tags">
-                    {item.details.map((detail) => (
-                      <span key={detail}><Check size={12}/>{detail}</span>
+                  <div className="integration-features">
+                    {item.features.map((feature) => (
+                      <div key={feature} className="integration-feature">
+                        <span className="integration-check">✓</span>
+                        <span>{feature}</span>
+                      </div>
                     ))}
                   </div>
 
-                  <div className="catalog-card-bottom">
-                    <span><ShieldCheck size={14}/> Permission-based access</span>
-                    <a href="/catalog/telegram">
-                      Explore <ArrowUpRight size={15}/>
+                  <div className="integration-card-bottom">
+                    <span className="integration-type">
+                      <Sparkles size={14} />
+                      MCP Integration
+                    </span>
+
+                    <a
+                      href="#telegram"
+                      className="integration-explore"
+                    >
+                      Explore
+                      <ArrowUpRight size={17} />
                     </a>
                   </div>
                 </motion.article>
-              ))}
+              );
+            })}
+          </div>
+        ) : (
+          <motion.div
+            className="catalog-empty"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <div className="catalog-empty-icon">
+              <Search size={27} />
             </div>
-          ) : (
-            <div className="empty-results">
-              <Search size={27}/>
-              <h3>Nothing found</h3>
-              <p>Try another search or choose a different category.</p>
-              <button onClick={() => { setSearch(""); setCategory("Все категории"); }}>
-                Reset filters
-              </button>
-            </div>
-          )}
-        </div>
+            <h3>No integrations found</h3>
+            <p>Try changing your search or selecting another category.</p>
+            <button
+              type="button"
+              onClick={() => {
+                setSearch("");
+                setCategory("Все категории");
+              }}
+            >
+              Reset filters
+            </button>
+          </motion.div>
+        )}
       </section>
 
-      <footer className="footer wrap">
-        <a className="brand" href="/">
-          <span className="brand-mark"><Command size={17}/></span>
-          AI MCP <b>TOOLS</b>
-        </a>
-        <span>© 2026 AI MCP Tools</span>
-        <a href="/#security">Privacy & security</a>
-      </footer>
+      <section className="catalog-bottom">
+        <div className="catalog-bottom-icon">
+          <Sparkles size={23} />
+        </div>
+        <div>
+          <h3>One protocol. More possibilities.</h3>
+          <p>
+            Connect MCP-compatible tools to your AI assistant and
+            build a more capable workflow.
+          </p>
+        </div>
+      </section>
     </main>
   );
 }
