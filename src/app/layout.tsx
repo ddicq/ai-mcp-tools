@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "./footer.css";
+import "./interaction-fixes.css";
 import SiteChrome from "@/components/SiteChrome";
+import AccountShortcut from "@/components/AccountShortcut";
 
 export const metadata: Metadata = {
   title: "AI MCP Tools — Connect your tools to AI",
@@ -17,7 +19,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <body>
-        <SiteChrome>{children}</SiteChrome>
+        <SiteChrome>
+          <AccountShortcut />
+          {children}
+        </SiteChrome>
       </body>
     </html>
   );

@@ -1,0 +1,114 @@
+/* AI MCP Tools interaction and profile update */
+.global-language-switch {
+  top: auto !important;
+  right: 18px !important;
+  bottom: 18px !important;
+  z-index: 120 !important;
+  padding: 10px 13px !important;
+}
+
+.aimcp-account-shortcut {
+  position: fixed;
+  right: 18px;
+  bottom: 70px;
+  z-index: 119;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 13px;
+  border: 1px solid var(--line, rgba(130,130,160,.25));
+  border-radius: 12px;
+  color: var(--text, #fff);
+  background: var(--surface, #17192b);
+  box-shadow: 0 8px 30px rgba(0,0,0,.1);
+  backdrop-filter: blur(14px);
+  font-size: 11px;
+  font-weight: 700;
+}
+.aimcp-account-shortcut:hover { border-color: var(--purple, #8c72ed); color: var(--purple, #8c72ed); }
+
+.core-inner span, .core-inner small { display: none !important; }
+.catalog-visual-core span { display: none !important; }
+.telegram-float { display: none !important; }
+
+.aimcp-auth-page, .aimcp-profile-page {
+  min-height: 78vh;
+  padding: 60px 20px 100px;
+  color: var(--text, #f5f5fa);
+  background:
+    radial-gradient(circle at 50% 5%, rgba(126,96,235,.15), transparent 35%),
+    var(--bg, #0d0f1c);
+}
+.aimcp-auth-card {
+  width: min(100%, 470px);
+  margin: 25px auto;
+  padding: 38px;
+  border: 1px solid var(--line, rgba(130,130,160,.2));
+  border-radius: 24px;
+  background: var(--surface, #17192b);
+  box-shadow: 0 25px 80px rgba(0,0,0,.18);
+  text-align: center;
+}
+.aimcp-auth-back, .aimcp-profile-back {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  color: var(--muted, #999);
+  font-size: 12px;
+}
+.aimcp-auth-logo { width: 64px; height: 64px; object-fit: contain; margin: 30px auto 10px; }
+.aimcp-auth-kicker, .aimcp-profile-kicker { color: var(--purple, #9a83ff); font: 10px monospace; letter-spacing: 2px; }
+.aimcp-auth-card h1, .aimcp-profile-intro h1 { margin: 10px 0; font-size: clamp(30px, 5vw, 42px); letter-spacing: -1.5px; }
+.aimcp-auth-description { color: var(--muted, #999); font-size: 13px; line-height: 1.8; }
+.aimcp-auth-providers { display: grid; gap: 12px; margin: 28px 0 20px; }
+.aimcp-auth-providers button {
+  min-height: 52px; display: flex; align-items: center; justify-content: center; gap: 12px;
+  border: 1px solid var(--line, rgba(130,130,160,.25)); border-radius: 12px;
+  color: var(--text, #fff); background: var(--surface-2, #202238); cursor: pointer; font-weight: 700;
+}
+.aimcp-auth-providers button:disabled { opacity: .6; cursor: wait; }
+.aimcp-google-mark { color: #4285f4; font-size: 20px; font-weight: 900; }
+.aimcp-telegram-mark { color: #29a9e8; font-size: 19px; }
+.aimcp-auth-security { display: flex; justify-content: center; align-items: center; gap: 8px; color: var(--muted, #999); font-size: 10px; line-height: 1.5; }
+
+.aimcp-profile-wrap { width: min(1050px, 100%); margin: auto; }
+.aimcp-profile-header { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding-bottom: 25px; border-bottom: 1px solid var(--line); }
+.aimcp-profile-brand { font-size: 13px; font-weight: 800; }
+.aimcp-profile-brand b { color: var(--muted); font-size: 9px; letter-spacing: 2px; }
+.aimcp-profile-intro { padding: 45px 0 25px; }
+.aimcp-profile-intro > p:last-child { color: var(--muted); font-size: 13px; }
+.aimcp-profile-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 18px; }
+.aimcp-profile-card { min-width: 0; padding: 25px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
+.aimcp-profile-wide { grid-column: 1 / -1; }
+.aimcp-profile-card-title { display: flex; align-items: center; gap: 10px; color: var(--purple); }
+.aimcp-profile-card-title h2 { margin: 0; color: var(--text); font-size: 16px; }
+.aimcp-user-summary { display: flex; align-items: center; gap: 15px; margin: 25px 0 18px; }
+.aimcp-user-avatar { width: 58px; height: 58px; flex: 0 0 auto; border-radius: 18px; object-fit: cover; background: var(--surface-2); }
+.aimcp-user-avatar-fallback { display: grid; place-items: center; color: var(--muted); }
+.aimcp-user-meta { min-width: 0; display: grid; gap: 5px; }
+.aimcp-user-meta strong { overflow-wrap: anywhere; }
+.aimcp-user-meta span { color: var(--muted); font-size: 11px; overflow-wrap: anywhere; }
+.aimcp-account-status { display: flex; align-items: center; gap: 8px; color: #39b980; font-size: 11px; }
+.aimcp-profile-signout { display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; padding: 10px 13px; border: 1px solid var(--line); border-radius: 10px; color: var(--text); background: transparent; cursor: pointer; font-size: 11px; }
+.aimcp-integrations-empty { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding-top: 25px; }
+.aimcp-integrations-empty > span { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; color: var(--purple); background: rgba(130,100,240,.12); }
+.aimcp-integrations-empty strong { font-size: 13px; }
+.aimcp-integrations-empty p, .aimcp-security-row p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.8; }
+.aimcp-integrations-empty a { margin-top: 5px; color: var(--purple); font-size: 11px; font-weight: 800; }
+.aimcp-security-row { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.aimcp-security-row:last-child { border-bottom: 0; padding-bottom: 0; }
+.aimcp-security-row strong { font-size: 12px; }
+.aimcp-security-row p { margin-top: 6px; }
+.aimcp-security-badge { flex: 0 0 auto; color: #39b980; font-size: 10px; }
+.aimcp-security-pending { color: var(--muted); }
+
+@media (max-width: 650px) {
+  .global-language-switch { right: 12px !important; bottom: 12px !important; }
+  .aimcp-account-shortcut { right: 12px; bottom: 62px; }
+  .aimcp-profile-grid { grid-template-columns: 1fr; }
+  .aimcp-profile-wide { grid-column: auto; }
+  .aimcp-auth-card { padding: 28px 20px; }
+  .aimcp-profile-card { padding: 20px; }
+  .aimcp-security-row { align-items: flex-start; flex-direction: column; gap: 8px; }
+}
