@@ -13,7 +13,7 @@ const Telegram = {
       scope: "openid profile",
     },
   },
-  checks: ["pkce", "state"] as ["pkce", "state"],
+  checks: ["pkce"] as ["pkce"],
   idToken: true,
   profile(profile: Record<string, string>) {
     return {
