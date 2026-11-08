@@ -7,7 +7,7 @@ import {
   ArrowRight, ArrowUpRight, Bot, Check, ChevronLeft, ChevronRight,
   Command, Fingerprint, Globe2, Layers3, LockKeyhole, MessageCircle,
   MousePointer2, Network, Plug, ShieldCheck, Sparkles, WandSparkles,
-  X, Zap
+  X, Zap, Headphones, Lightbulb, Send
 } from "lucide-react";
 
 const tour = [
@@ -52,6 +52,9 @@ const benefits = [
   },
 ];
 
+const FOOTER_LOGO =
+  "https://cdn.phototourl.com/member/2026-11-08-383f26a8-9dfb-4de1-a5a5-26c01229e09d.png";
+
 export default function Home() {
   const [welcomeOpen, setWelcomeOpen] = useState(false);
   const [tourStep, setTourStep] = useState(0);
@@ -70,7 +73,7 @@ export default function Home() {
   }
 
   function showLoginInfo(provider: string) {
-  signIn(provider.toLowerCase(), { callbackUrl: "/" });
+    signIn(provider.toLowerCase(), { callbackUrl: "/" });
   }
 
   return (
@@ -309,13 +312,47 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="footer wrap">
-        <a className="brand" href="/">
-          <span className="brand-mark"><Command size={17}/></span>
-          AI MCP <b>TOOLS</b>
-        </a>
-        <span>© 2026 AI MCP Tools</span>
-        <a href="#security">Privacy & security</a>
+      <footer className="footer footer-expanded">
+        <div className="footer-main wrap">
+          <div className="footer-brand-column">
+            <a className="brand" href="/">
+              <span className="brand-mark"><Command size={17}/></span>
+              AI MCP <b>TOOLS</b>
+            </a>
+            <p>One platform. More possibilities for your AI.</p>
+            <motion.div
+              className="footer-logo-stage"
+              animate={{ y: [0, -7, 0], rotate: [0, 1.5, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <div className="footer-logo-glow"/>
+              <img src={FOOTER_LOGO} alt="AI MCP Tools logo" />
+            </motion.div>
+          </div>
+
+          <div className="footer-links-column">
+            <h3>Explore</h3>
+            <a href="/catalog">MCP catalog <ArrowUpRight size={14}/></a>
+            <a href="https://t.me/aimcptools" target="_blank" rel="noreferrer">Our Telegram channel <Send size={14}/></a>
+          </div>
+
+          <div className="footer-links-column">
+            <h3>Get in touch</h3>
+            <a href="https://tally.so/r/X5rybY" target="_blank" rel="noreferrer">Support <Headphones size={14}/></a>
+            <a href="https://tally.so/r/OQlyNg" target="_blank" rel="noreferrer">Suggest a resource <Lightbulb size={14}/></a>
+          </div>
+
+          <div className="footer-links-column">
+            <h3>Legal</h3>
+            <a href="/privacy">Privacy policy <ArrowUpRight size={14}/></a>
+            <a href="/terms">Terms of service <ArrowUpRight size={14}/></a>
+          </div>
+        </div>
+
+        <div className="footer-bottom wrap">
+          <span>© 2026 AI MCP Tools. All rights reserved.</span>
+          <span>Built for a more connected AI ecosystem.</span>
+        </div>
       </footer>
 
       <AnimatePresence>
